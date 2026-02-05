@@ -18,11 +18,10 @@ int main(void)
     for(int x = 1; x <= N; x++)
         for(int y = 1; y <= N; y++)
         {
-            int sxy = 0;
-            cin >> sxy;
+            int vxy = 0;
+            cin >> vxy;
 
-            S[x][y] = (y == 1) ? sxy
-                               : S[x][y - 1] + sxy; 
+            S[x][y] = S[x - 1][y] + S[x][y - 1] - S[x - 1][y - 1] + vxy;
         }
 
     int x1 = 0; int y1 = 0;
@@ -31,11 +30,8 @@ int main(void)
     for(int rep = 0; rep < M; rep++)
     {
         cin >> x1 >> y1 >> x2 >> y2;
-        
-        int answer = 0;
-        for(int x = x1; x <= x2; x++)
-            answer += S[x][y2] - S[x][y1 - 1];
 
+        int answer = S[x2][y2] - S[x1 - 1][y2] - S[x2][y1 - 1] + S[x1 - 1][y1 - 1];
         cout << answer << '\n';
     }
 }
